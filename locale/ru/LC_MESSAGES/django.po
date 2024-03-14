@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-05 22:05+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: EdisonDashboard/settings.py:122
+msgid "Uzbek"
+msgstr "Узбекский"
+
+#: EdisonDashboard/settings.py:123
+msgid "Russian"
+msgstr "Русский"
+
+#: templates/recursive_tree.html:6 templates/tree_node.html:596
+msgid "Savol"
+msgstr "Вопрос"
+
+#: templates/recursive_tree.html:8 templates/tree_node.html:598
+msgid "Javob"
+msgstr "Ответ"
+
+#: templates/recursive_tree.html:31 templates/recursive_tree.html:50
+#: templates/tree_node.html:618 templates/tree_node.html:639
+msgid "Savol 🇺🇿"
+msgstr "Вопрос 🇺🇿"
+
+#: templates/recursive_tree.html:34 templates/recursive_tree.html:52
+#: templates/tree_node.html:621 templates/tree_node.html:641
+msgid "Savol 🇷🇺"
+msgstr "Вопрос 🇷🇺"
+
+#: templates/recursive_tree.html:37 templates/recursive_tree.html:54
+#: templates/tree_node.html:624 templates/tree_node.html:643
+msgid "Javob 🇺🇿"
+msgstr "Ответ 🇺🇿"
+
+#: templates/recursive_tree.html:39 templates/recursive_tree.html:56
+#: templates/tree_node.html:626 templates/tree_node.html:645
+msgid "Javob 🇷🇺"
+msgstr "Ответ 🇷🇺"
+
+#: templates/recursive_tree.html:42
+#, fuzzy
+#| msgid "O'zgartish"
+msgid "O'zgartirish"
+msgstr "Изменить"
+
+#: templates/recursive_tree.html:43 templates/recursive_tree.html:61
+#: templates/tree_node.html:631 templates/tree_node.html:650
+msgid "Bekor qilish"
+msgstr "Отмена"
+
+#: templates/recursive_tree.html:59 templates/tree_node.html:648
+msgid "Yaratish"
+msgstr "Создать"
+
+#: templates/tree_node.html:30 templates/tree_node.html:156
+msgid "Ssenariy"
+msgstr "Сценарий"
+
+#: templates/tree_node.html:150
+msgid "Boshqaruv paneli"
+msgstr "Панель управления"
+
+#: templates/tree_node.html:163
+msgid "Tartiblar"
+msgstr "Распоряжения"
+
+#: templates/tree_node.html:196
+msgid "Sahifalar"
+msgstr "Страницы"
+
+#: templates/tree_node.html:498 templates/tree_node.html:499
+msgid "Qidirish"
+msgstr "Поиск"
+
+#: templates/tree_node.html:540
+msgid "Admin"
+msgstr "Админ"
+
+#: templates/tree_node.html:551
+msgid "Mening profilim"
+msgstr "Мой профайл"
+
+#: templates/tree_node.html:557
+msgid "Sozlamalar"
+msgstr "Настройки"
+
+#: templates/tree_node.html:564
+msgid "Hisob-kitoblar"
+msgstr "Расчеты"
+
+#: templates/tree_node.html:575
+msgid "Chiqish"
+msgstr "Выход"
+
+#: templates/tree_node.html:629
+msgid "O'zgartish"
+msgstr "Изменить"

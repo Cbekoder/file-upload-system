@@ -1,0 +1,204 @@
+{% load i18n %}
+<ul class="tree-branch" xmlns="http://www.w3.org/1999/html">
+    {% for node in nodes %}
+        <li class="tree-item">
+            <div class="tree-node" name="tree_input{{ node.id }}">
+                <label>{% trans "Savol" %}:</label>
+                <div class="read-only-textbox">{{ node.question }}</div>
+                <label>{% trans "Javob" %}:</label>
+                <div class="read-only-textbox">{{ node.answer }}</div>
+                <button class="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalAdd{{ node.id }}">
+                    <div>+</div>
+                </button>
+                {# pupup menu #}
+                <div class="dropdown popmenu">
+                    <button class="btn p-0 dropdown-toggle hide-arrow"
+                            data-bs-toggle="dropdown">
+                        <i style="color: white;" class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item"
+                           data-bs-toggle="modal"
+                           data-bs-target="#modalEdit{{ node.id }}">
+                            <i class="bx bx-edit-alt me-1"></i> Tahrirlash</a
+                        >
+                        <a class="dropdown-item" href="/edit/delscript/{{ node.id }}"
+                        ><i class="bx bx-trash me-1"></i> O'chirish</a
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalAdd{{ node.id }}" tabindex="-1"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="post">{% csrf_token %}
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">
+                                    Yangi yaratish</h5>
+                                <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                ></button>
+                            </div>
+                            <input type="hidden" name="forma" value="f2">
+                            <input type="hidden" name="parent_id" value="{{ node.id }}">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Savol 🇺🇿" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="question_uz"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Savol 🇷🇺" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="question_ru"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Javob 🇺🇿" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="answer_uz"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Javob 🇷🇺" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="answer_ru"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">
+                                    {% trans "Bekor qilish" %}
+                                </button>
+                                <button type="submit"
+                                        class="btn btn-primary">{% trans "O'zgartish" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalEdit{{ node.id }}" tabindex="-1"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="post">{% csrf_token %}
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">
+                                    Tahrirlash</h5>
+                                <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                ></button>
+                            </div>
+                            <input type="hidden" name="forma" value="f1">
+                            <input type="hidden" name="node_id" value="{{ node.id }}">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Savol 🇺🇿" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="question_uz"
+                                                value="{{ node.question_uz }}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Savol 🇷🇺" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="question_ru"
+                                                value="{{ node.question_ru }}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Javob 🇺🇿" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="answer_uz"
+                                                value="{{ node.answer_uz }}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameWithTitle"
+                                               class="form-label">{% trans "Javob 🇷🇺" %}:</label>
+                                        <input
+                                                type="text"
+                                                id="nameWithTitle"
+                                                class="form-control"
+                                                name="answer_ru"
+                                                value="{{ node.answer_ru }}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">
+                                    {% trans "Bekor qilish" %}
+                                </button>
+                                <button type="submit"
+                                        class="btn btn-primary">{% trans "O'zgartish" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if node.child_nodes.all %}
+                {% include 'recursive_tree.html' with nodes=node.child_nodes.all %}
+            {% endif %}
+            </input>
+        </li>
+    {% endfor %}
+</ul>
