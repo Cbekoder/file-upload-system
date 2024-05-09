@@ -539,16 +539,16 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <div id="tree" class="tree">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Ssenariylar /</span> {{ folder.title }}</h4>
                     {% if scripts %}
                         <div class="tree-widget">
                             <div class="tree-structure">
                                 {% for script in scripts %}
                                     {% if script.parent_id is None %}
-                                        <div class="tree-node" name="script_answer_{{ script.id }}">
-                                            <label>{% trans "Savol" %}:</label>
-                                            <div class="read-only-textbox">{{ script.question }}</div>
-                                            <label>{% trans "Javob" %}:</label>
+                                        <div style="padding-top: 30px" class="tree-node" name="script_answer_{{ script.id }}">
+{#                                            <label>{% trans "Abonent" %}:</label>#}
+{#                                            <div class="read-only-textbox">{{ script.question }}</div>#}
+                                            <label style="margin-bottom: 8px">{% trans "Kirish" %}:</label>
                                             <div class="read-only-textbox">{{ script.answer }}</div>
                                             <button class="button" style="cursor: pointer;"
                                                     data-bs-toggle="modal"
@@ -565,22 +565,8 @@
                                                      data-bs-target="#modalEdit{{ script.id }}">
                                                         <i class="bx bx-edit-alt me-1"></i> Tahrirlash</a
                                                     >
-                                                    <a class="dropdown-item" href="/edit/delgroup/{{ group.id }}"
-                                                    ><i class="bx bx-trash me-1"></i> O'chirish</a
-                                                    >
                                                 </div>
                                             </div>
-{#                                            <div id="popupmenu{{ script.id }}" class="popmenu">#}
-{#                                                <input type="checkbox" href="#" class="popmenu-open" name="menu-open"#}
-{#                                                       id="menu-open{{ script.id }}">#}
-{#                                                <label class="popmenu-open-button" for="menu-open{{ script.id }}">#}
-{#                                                    <i class='bx bx-dots-vertical-rounded'></i>#}
-{#                                                </label>#}
-{#                                                <div data-bs-toggle="modal"#}
-{#                                                     data-bs-target="#modalEdit{{ script.id }}"#}
-{#                                                     class="popmenu-item item-1">#}
-{#                                                    <i class="fa-solid fa-pen-to-square"></i></div>#}
-{#                                            </div>#}
                                         </div>
                                         <div class="modal fade" id="modalEdit{{ script.id }}" tabindex="-1"
                                              aria-hidden="true">
@@ -603,33 +589,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Savol 🇺🇿" %}:</label>
-                                                                    <input
-                                                                            type="text"
-                                                                            id="nameWithTitle"
-                                                                            class="form-control"
-                                                                            name="question_uz"
-                                                                            value="{{ script.question_uz }}"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col mb-3">
-                                                                    <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Savol 🇷🇺" %}:</label>
-                                                                    <input
-                                                                            type="text"
-                                                                            id="nameWithTitle"
-                                                                            class="form-control"
-                                                                            name="question_ru"
-                                                                            value="{{ script.question_ru }}"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col mb-3">
-                                                                    <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Javob 🇺🇿" %}:</label>
+                                                                           class="form-label">{% trans "Operator 🇺🇿" %}:</label>
                                                                     <input
                                                                             type="text"
                                                                             id="nameWithTitle"
@@ -642,7 +602,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Javob 🇷🇺" %}:</label>
+                                                                           class="form-label">{% trans "Operator 🇷🇺" %}:</label>
                                                                     <input
                                                                             type="text"
                                                                             id="nameWithTitle"
@@ -659,7 +619,7 @@
                                                                 {% trans "Bekor qilish" %}
                                                             </button>
                                                             <button type="submit"
-                                                                    class="btn btn-primary">{% trans "O'zgartish" %}
+                                                                    class="btn btn-primary">{% trans "O'zgaritish" %}
                                                             </button>
                                                         </div>
                                                     </form>
@@ -687,7 +647,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Savol 🇺🇿" %}:</label>
+                                                                           class="form-label">{% trans "Abonent 🇺🇿" %}:</label>
                                                                     <input
                                                                             type="text"
                                                                             id="nameWithTitle"
@@ -699,7 +659,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Savol 🇷🇺" %}:</label>
+                                                                           class="form-label">{% trans "Abonent 🇷🇺" %}:</label>
                                                                     <input
                                                                             type="text"
                                                                             id="nameWithTitle"
@@ -711,7 +671,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Javob 🇺🇿" %}:</label>
+                                                                           class="form-label">{% trans "Operator 🇺🇿" %}:</label>
                                                                     <input
                                                                             type="text"
                                                                             id="nameWithTitle"
@@ -723,7 +683,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <label for="nameWithTitle"
-                                                                           class="form-label">{% trans "Javob 🇷🇺" %}:</label>
+                                                                           class="form-label">{% trans "Operator 🇷🇺" %}:</label>
                                                                     <input
                                                                             type="text"
                                                                             id="nameWithTitle"
@@ -739,7 +699,7 @@
                                                                 {% trans "Bekor qilish" %}
                                                             </button>
                                                             <button type="submit"
-                                                                    class="btn btn-primary">{% trans "O'zgartish" %}
+                                                                    class="btn btn-primary">{% trans "Yaratish" %}
                                                             </button>
                                                         </div>
                                                     </form>

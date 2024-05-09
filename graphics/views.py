@@ -77,10 +77,10 @@ class DefaultAdd(View):
             if Script.objects.filter(folder_id=folder).count() == 0 and folder.user_id == request.user:
                 script = Script.objects.create(
                     folder_id= folder,
-                    question_uz="Robot",
-                    answer_uz="Assalomu alaykum",
-                    question_ru="Робот",
-                    answer_ru="Привет",
+                    question_uz=None,
+                    answer_uz="Assalomu alaykum, Bu botning birinchi xabari!!!",
+                    question_ru=None,
+                    answer_ru="Привет! Это первая новость об этом боте!!!",
                     parent_id=None
                 )
                 folder.status = "Faol"
