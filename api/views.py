@@ -43,7 +43,6 @@ class CallsAPIView(APIView):
             return Response({"error": "Please provide 'id' in the request"}, status=status.HTTP_400_BAD_REQUEST)
         except Calls.DoesNotExist:
             return Response({"error": "Call with the specified ID does not exist"}, status=status.HTTP_404_NOT_FOUND)
-
         serializer = CallsUpdateSerializer(call_instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
