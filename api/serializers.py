@@ -2,6 +2,7 @@ from rest_framework import serializers
 from graphics.models import Script
 from .models import Numbers, Calls
 
+
 class ScriptSerializer(serializers.ModelSerializer):
     child_nodes = serializers.SerializerMethodField()
 
@@ -15,10 +16,12 @@ class ScriptSerializer(serializers.ModelSerializer):
             return ScriptSerializer(children, many=True).data
         return None
 
+
 class NumberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Numbers
         fields = "__all__"
+
 
 class CallSerializer(serializers.ModelSerializer):
     # number = serializers.SerializerMethodField()
@@ -29,18 +32,14 @@ class CallSerializer(serializers.ModelSerializer):
     # def get_number(self, obj):
     #     return Numbers.objects.get(pk=obj.pk).number
 
+
 class CallsCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calls
-        fields=['id', 'number']
+        fields = ['id', 'number']
+
 
 class CallsUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calls
-        fields=['id', 'data', 'status']
-
-
-
-
-
-
+        fields = ['id', 'data', 'status']

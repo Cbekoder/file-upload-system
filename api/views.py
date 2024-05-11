@@ -22,20 +22,34 @@ class NumberAPIView(APIView):
         serializer = NumberSerializer(numbers, many=True)
         return Response(serializer.data)
 
-class CallsAPIView(APIView):
-    def get(self, request):
-        calls=Calls.objects.all()
-        serializer = CallSerializer(calls, many=True)
-        return Response(serializer.data)
-
     def post(self, request):
-        serializer = CallsCreateSerializer(data=request.data)
+        serializer = NumberSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request):
+class getCalls(APIView):
+    def get(self, request):
+        calls = Calls.objects.all()
+        serializer = CallSerializer(calls, many=True)
+        return Response(serializer.data)
+
+
+class postCalls(APIView):
+    def post(self, request):
+        data = request.data
+        form_data = {
+            "phone_number": data["phone_number"],
+        }
+        serializer = CallsCreateSerializer(data=form_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class editCalls(APIView):
+    def post(self, request):
         try:
             instance_id = request.data['id']
             call_instance = Calls.objects.get(pk=instance_id)
@@ -47,6 +61,15 @@ class CallsAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class postFullCall(APIView):
+    def post(self, request):
+        serializer = CallSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
