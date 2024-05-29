@@ -6,26 +6,31 @@ from django.views import View
 from users.models import User
 from .models import *
 
+
+def UserNotifications(user):
+    categories = Category.objects.all()
+    notifications = {}
+
+    for category in categories:
+        unread_count = RecievedFiles.objects.filter(
+            file__category=category,
+            file__to_user=user,
+            isRead=False,
+        ).count()
+        if unread_count > 0:
+            notifications[category.id] = unread_count
+    return notifications
+
 class IndexView(View):
     def get(self, request):
         if request.user.is_authenticated:
             categories = Category.objects.all()
-            notifications = {}
-
-            for category in categories:
-                unread_count = RecievedFiles.objects.filter(
-                    file__category=category,
-                    isRead=False,
-                ).count()
-                if unread_count > 0:
-                    notifications[category.id] = unread_count
-
+            notifications = UserNotifications(request.user)
             context = {
                 "user": request.user,
                 "categories": categories,
                 'notifications': notifications,
             }
-
             return render(request, 'index.html', context)
         return redirect('login')
 
@@ -90,26 +95,37 @@ class UploadFileView(View):
 
             category_id = request.POST.get('category')
             category_instance = get_object_or_404(Category, pk=category_id)
-            File.objects.create(
+            file = File.objects.create(
                 file=request.POST.get('file'),
                 user=request.user,
                 category=category_instance,
                 to_user=to_user,
                 description=description,
             )
-
-            return redirect('/files')
+            return redirect(f'/files/from/{Category.objects.get(id=category_id).title.lower()}/')
         return redirect('/login')
 class FileDetailView(View):
-    def get(self, request,pk):
+    def get(self, request, pk):
         if request.user.is_authenticated:
-            file=File.objects.get(id=pk)
-
-            context={
-                "file":file,
-            }
-            return render(request, "file_detail.html", context)
+            try:
+                file = File.objects.get(id=pk, to_user=request.user)
+                context = {
+                    "file": file,
+                }
+                return render(request, "file_detail.html", context)
+            except File.DoesNotExist:
+                return redirect('file-not-found/')
         return redirect('login/')
+    def post(self,request, pk):
+        if request.user.is_authenticated:
+            RecievedFiles.objects.create(
+                file=request.POST.get('file'),
+                comment=request.POST.get('comment'),
+                isRead=request.POST.get('isRead'),
+                isCompleted=request.POST.get('isCompleted'),
+            )
+            return redirect(f'/files/from/{Category.objects.get(id=category_id).title.lower()}/')
+        return r
 class CategoriesView(View):
     def get(self, request):
         if request.user.is_authenticated:
