@@ -149,7 +149,21 @@
                                     placeholder="Enter your username"
                                     autofocus
                             />
+
+
                         </div>
+
+
+                        <label>Lavozim</label>
+                        <br>
+                            <select class="btn btn-outline-secondary dropdown-toggle show" name="role">
+
+                                {% for role in roles %}
+                                   <option value="{{ role.id }}">{{ role.title }}</option>
+                                {% endfor %}
+                            </select>
+
+
                         {% if error_message %}
                             <p style="color: red;">{{ error_message }}</p>
                         {% endif %}

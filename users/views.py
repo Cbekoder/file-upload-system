@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import User
+from .models import User, Role
 
 class LoginView(View):
     def get(self, request):
@@ -18,11 +18,20 @@ class LoginView(View):
         return redirect('/')
 
 
+class Roles(View):
+    def get(self, request):
+        pass
+    def post(self, request):
+        pass
 
 
 class RegisterView(View):
     def get(self, request):
-        return render(request, 'auth-register-basic.html')
+        context={
+            "roles": Role.objects.all(),
+            "role1":Role.objects.get(id=1)
+        }
+        return render(request, 'auth-register-basic.html', context)
 
     def post(self, request):
         username = request.POST.get("username")
@@ -30,16 +39,20 @@ class RegisterView(View):
             error_message = 'This username is already taken.'
             return render(request, 'auth-register-basic.html', {'error_message': error_message})
         else:
+            role_id = request.POST.get("role")
+            role_instance = Role.objects.get(id=role_id)
             user = User.objects.create_user(
             username=username,
             password=request.POST.get("password"),
             email=request.POST.get("email"),
+            role=role_instance,
             is_staff=False,
             is_active=True,
             is_superuser=False,
         )
         login(request, user)
-        return redirect("/user/profile")
+
+        return redirect("/user/profile", )
 
 
 class ForgotPasswordView(View):
