@@ -1,4 +1,4 @@
-# Edison Dashboard
+# File upload system
 
 Description of your project goes here.
 
@@ -12,4 +12,4 @@ Description of your project goes here.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Cbekoder/EdisonDashboard.git
+   git clone https://github.com/Cbekoder/file-upload-system.git

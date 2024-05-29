@@ -81,62 +81,57 @@ class UploadFileView(View):
         return redirect('/login')
     def post(self, request):
         if request.user.is_authenticated:
-            file = request.FILES['file']
-            category_title = request.POST.get('category')
+            # category_title =
             to_user_id = request.POST.get('to_user')
             description = request.POST.get('desc')
 
-            category = get_object_or_404(Category, title__iexact=category_title)
+            # category = get_object_or_404(Category, title__iexact=category_title)
             to_user = get_object_or_404(User, id=to_user_id)
 
-            file = File.objects.create(
-                file=file,
+            category_id = request.POST.get('category')
+            category_instance = get_object_or_404(Category, pk=category_id)
+            File.objects.create(
+                file=request.POST.get('file'),
                 user=request.user,
-                category=category,
+                category=category_instance,
                 to_user=to_user,
                 description=description,
             )
-            resieved_file=RecievedFiles.objects.create(
-                file=file.id,
 
-            )
             return redirect('/files')
         return redirect('/login')
+class FileDetailView(View):
+    def get(self, request,pk):
+        if request.user.is_authenticated:
+            file=File.objects.get(id=pk)
 
+            context={
+                "file":file,
+            }
+            return render(request, "file_detail.html", context)
+        return redirect('login/')
+class CategoriesView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            context = {
+                "user": request.user,
+                'categories': Category.objects.all()
+            }
+            return render(request, 'categories.html', context)
+        return redirect('login')
 
-
-
-
-
-
-
-
-
-# class NodeGroupView(View):
-#     def get(self, request):
-#         if request.user.is_authenticated:
-#             context = {
-#                 "user": request.user,
-#                 'groups': NodeGroups.objects.filter(user_id=request.user.id)
-#             }
-#             return render(request, 'categories.html', context)
-# #         return redirect('login')
-#
-#     def post(self, request):
-#         if request.user.is_authenticated:
-#             if request.POST.get('action') == 'new':
-#                 group = NodeGroups.objects.create(
-#                     title=request.POST.get('title').title(),
-#                     status="Yangi",
-#                     user_id=request.user
-#                 )
-#             elif request.POST.get('action') == 'alter':
-#                 group = NodeGroups.objects.get(id=request.POST.get('groid'))
-#                 group.title = request.POST.get('title').title()
-#                 group.status = request.POST.get('status')
-#                 group.save()
-#             return redirect('folders')
-#         return redirect('login')
+    def post(self, request):
+        if request.user.is_authenticated and request.user.is_staff:
+            if request.POST.get('action') == 'new':
+                Category.objects.create(
+                    title=request.POST.get('title').title(),
+                )
+            elif request.POST.get('action') == 'alter':
+                group = Category.objects.get(id=request.POST.get('cid'))
+                group.title = request.POST.get('title').title()
+                group.save()
+            return redirect('categories')
+        return redirect('login')
 
 
 # class TreeNode(View):

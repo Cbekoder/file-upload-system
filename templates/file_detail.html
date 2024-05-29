@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <!-- Content -->
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-xxl flex-grow-1 container-p-y" xmlns="http://www.w3.org/1999/html">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">{{ user.username }} /</span>
             Fayllar</h4>
 
@@ -11,18 +11,18 @@
                 <h5 class="mb-0">Basic with Icons</h5>
             </div>
             <div class="card-body">
-                <form method="post"> {% csrf_token %}
+                <form method="postff"> {% csrf_token %}
                     <div class="mb-4">
                         <label class="form-label" for="file">Fayl:</label>
                         <div class="input-group input-group-merge">
                                         <span id="file2" class="input-group-text">
                                             <i class="bx bxs-file"></i>
                                         </span>
-                            <input
+                            <a
                                     type="file"
                                     class="form-control"
                                     id="file"
-                                    name="file"/>
+                                    href="/file">{{ file.title }}</a>
                         </div>
                     </div>
                     <div class="row g-2">
