@@ -1,9 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
-from django.views import View
 import json
-from django.http import FileResponse, Http404
 from django.views import View
 from users.models import User
 from .models import *
