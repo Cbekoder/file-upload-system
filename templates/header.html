@@ -15,7 +15,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Ssenariy</title>
+    <title>Files</title>
 
     <meta name="description" content=""/>
 
@@ -142,12 +142,12 @@
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
                 </li>
-                {#                <li class="menu-item">#}
-                {#                    <a href="/edit/groups/" class="menu-link">#}
-                {#                        <i class='menu-icon tf-icons bx bxs-network-chart' ></i>#}
-                {#                        <div data-i18n="Analytics">Scenario</div>#}
-                {#                    </a>#}
-                {#                </li>#}
+                <li class="menu-item">
+                    <a href="/files/data/all/" class="menu-link">
+                        <i class='menu-icon tf-icons bx bxs-network-chart' ></i>
+                        <div data-i18n="Analytics">Hammasi</div>
+                    </a>
+                </li>
 
                 <!-- Layouts -->
                 <li class="menu-item">
@@ -329,7 +329,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">{{ user.first_name }} {{ user.last_name }}</span>
+                                                <span class="fw-semibold d-block">{{ user.full_name }}</span>
                                                 <small class="text-muted">Admin</small>
                                             </div>
                                         </div>
@@ -383,40 +383,6 @@
 
                 {% endblock %}
                 <!-- / Content -->
-
-                <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                        <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                        </div>
-                        <div>
-                            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                Themes</a>
-
-                            <a
-                                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Documentation</a
-                            >
-
-                            <a
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Support</a
-                            >
-                        </div>
-                    </div>
-                </footer>
-                <!-- / Footer -->
 
                 <div class="content-backdrop fade"></div>
             </div>

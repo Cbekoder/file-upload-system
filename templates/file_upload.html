@@ -12,60 +12,59 @@
             </div>
             <div class="card-body">
                 <form method="post"> {% csrf_token %}
-                    <div class="mb-4">
-                        <label class="form-label" for="file">Fayl:</label>
+                    <div class="col mb-3">
+                        <label class="form-label" for="basic-icon-default-email">Kimga:</label>
                         <div class="input-group input-group-merge">
-                                        <span id="file2" class="input-group-text">
-                                            <i class="bx bxs-file"></i>
-                                        </span>
-                            <input
-                                    type="file"
-                                    class="form-control"
-                                    id="file"
-                                    name="file"/>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-3">
-                            <label class="form-label" for="basic-icon-default-company">Kategoriya</label>
-                            <div class="input-group input-group-merge">
-                                            <span id="basic-icon-default-company2" class="input-group-text">
-                                                <i class="bx bx-category"></i>
-                                            </span>
-                                <select class="input-group-text" name="category">
-                                    {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.title }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col mb-3">
-                            <label class="form-label" for="basic-icon-default-email">Kimga:</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-user-check"></i></span>
-                                <select class="input-group-text" name="to_user">
-                                    {% for user in users %}
-                                        <option class="dropdown-menu show "
-                                                value="{{ user.id }}">{{ user.username }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                            <span class="input-group-text"><i class="bx bx-user-check"></i></span>
+                            <select class="input-group-text" name="to_user">
+                                <option class="dropdown-menu" selected disabled>Qabul qiluvchini tanlang</option>
+                                {% for user in users %}
+                                    <option class="dropdown-menu show "
+                                            value="{{ user.id }}">{{ user.full_name }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-company">Kategoriya</label>
+                        <div class="input-group input-group-merge" >
+                            <span id="basic-icon-default-company2" class="input-group-text">
+                                <i class="bx bx-category"></i>
+                            </span>
+                            <select class="input-group-text" name="category">
+                                <option class="dropdown-menu" selected disabled>Fayl kategoriyasini tanlang</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-message">Izoh</label>
                         <div class="input-group input-group-merge">
-                                        <span id="basic-icon-default-message2" class="input-group-text">
-                                            <i class="bx bx-comment"></i>
-                                        </span>
+                            <span id="basic-icon-default-message2" class="input-group-text">
+                                <i class="bx bx-comment"></i>
+                            </span>
                             <textarea
                                     id="basic-icon-default-message"
                                     name="desc"
                                     class="form-control"
                                     placeholder="Ushbu fayl...."
                                     aria-label="Ushbu fayl...."
-                                    aria-describedby="basic-icon-default-message2">
-                                        </textarea>
+                                    aria-describedby="basic-icon-default-message2"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="file">Fayl:</label>
+                        <div class="input-group input-group-merge">
+                            <span id="file2" class="input-group-text">
+                                <i class="bx bxs-file"></i>
+                            </span>
+                            <input
+                                    type="file"
+                                    class="form-control"
+                                    id="file"
+                                    name="file"/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Yuborish</button>

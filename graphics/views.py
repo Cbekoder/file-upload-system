@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
+from django.db.models import Q
 from django.views import View
 from users.models import User
 from .models import *
@@ -35,33 +37,49 @@ class IndexView(View):
         return redirect('login')
 
 class FilesView(View):
-    def get(self, request, type, category):
+    def get(self, request, typef, category):
         if request.user.is_authenticated:
-            category = get_object_or_404(Category, title__iexact=category)
-            if type == "from":
+            if category != "all":
+                category = get_object_or_404(Category, title__iexact=category)
+            if typef == "data":
                 files = File.objects.filter(
-                    user=request.user,
-                    category=category,
+                    Q(user=request.user) | Q(to_user=request.user)
                 )
-            elif type == "to":
+            elif typef == "to":
                 files = File.objects.filter(
                     to_user=request.user,
                     category=category,
                 )
+            elif typef == "from":
+                files = File.objects.filter(
+                    user=request.user,
+                    category=category,
+                )
             else:
-                return render(request,'404.html')
-
+                return render(request, '404.html')
+            per_page = request.GET.get('per_page', 10)
             categories = Category.objects.all()
             roles = Role.objects.all()
             users = User.objects.exclude(id=request.user.id)
-            user_by=request.user
+
+            # Pagination
+            paginator = Paginator(files.order_by("uploaded_date"), per_page)
+            page = request.GET.get('page')
+
+            try:
+                paginated_files = paginator.page(page)
+            except PageNotAnInteger:
+                paginated_files = paginator.page(1)
+            except EmptyPage:
+                paginated_files = paginator.page(paginator.num_pages)
             context = {
                 "user": request.user,
                 "categories": categories,
                 "roles": roles,
                 "users": users,
-                "files": files,
-                "user_by": user_by,
+                'per_page': int(per_page),
+                "files": paginated_files,
+                "user_by": request.user,
             }
             return render(request, 'files.html', context)
         return redirect('login')

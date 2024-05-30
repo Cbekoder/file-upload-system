@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    # 'jazzmin',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -152,8 +152,8 @@ JAZZMIN_SETTINGS = {
 
     "topmenu_links": [
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
-        # {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "auth.User"},
+        {"name": "Web Site", "url": "http://localhost:8000", "new_window": True},
+        # {"model": "auth.User"},
         {"app": "books"},
     ],
 
@@ -161,10 +161,9 @@ JAZZMIN_SETTINGS = {
     # User Menu #
     #############
     "usermenu_links": [
-        # {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Web Site", "url": "https://localhost:8000/", "new_window": True},
         {"model": "auth.user"}
     ],
-
     #############
     # Side Menu #
     #############

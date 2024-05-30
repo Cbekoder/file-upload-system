@@ -13,3 +13,8 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def full_name(self):
+        if self.first_name and self.last_name:
+            return self.first_name + " " + self.last_name
+        return self.username
