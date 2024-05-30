@@ -1,4 +1,4 @@
-#!/home/cbekoder/PycharmProjects/file_upload_system/.venv/bin/python
+#!/home/farxodbek/file-upload-system/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

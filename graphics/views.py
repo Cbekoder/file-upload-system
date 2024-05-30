@@ -105,17 +105,20 @@ class UploadFileView(View):
             return redirect(f'/files/from/{Category.objects.get(id=category_id).title.lower()}/')
         return redirect('/login')
 class FileDetailView(View):
-    def get(self, request, pk):
+    def get(self, request, type, category, pk):
         if request.user.is_authenticated:
             try:
                 file = File.objects.get(id=pk, to_user=request.user)
                 context = {
                     "file": file,
+                    "type": type,
+                    "category": category,
                 }
                 return render(request, "file_detail.html", context)
             except File.DoesNotExist:
                 return redirect('file-not-found/')
         return redirect('login/')
+    
     def post(self,request, pk):
         if request.user.is_authenticated:
             RecievedFiles.objects.create(
@@ -124,8 +127,8 @@ class FileDetailView(View):
                 isRead=request.POST.get('isRead'),
                 isCompleted=request.POST.get('isCompleted'),
             )
-            return redirect(f'/files/from/{Category.objects.get(id=category_id).title.lower()}/')
-        return r
+            return redirect(f'/files/from/{Category.objects.get(id=pk).title.lower()}/')
+        return redirect('login')
 class CategoriesView(View):
     def get(self, request):
         if request.user.is_authenticated:

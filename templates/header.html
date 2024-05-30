@@ -181,7 +181,7 @@
                                 <a href="/files/to/{{ category.title|lower }}" class="menu-link">
                                     <div data-i18n="Without menu">{{ category.title }}</div>
                                     {% if category.id in notifications %}
-                                        <div class="badge bg-danger rounded-pill ms-auto">{{ notifications[category.id] }}</div>
+                                        <div class="badge bg-danger rounded-pill ms-auto">{{ notifications.category.id }}</div>
                                     {% endif %}
                                 </a>
                             </li>
@@ -450,6 +450,6 @@
 <script src="{% static 'js/dashboards-analytics.js' %}"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js'%}"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
