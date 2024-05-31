@@ -5,29 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec75df60-4b69-45c1-8f72-9b28c38871d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/graphics/context_processors.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/templatetags/custom_filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/templatetags/custom_filters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphics/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/files/IMG_20240516_233234_vFOGXlj.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/file_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/file_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/file_upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/file_upload.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/files.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/files.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/roles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/roles.html" afterDir="false" />
-    </list>
-    <list id="cd073904-1a7b-4320-99e7-e577b195aa33" name="Changes by farxodbek" comment="">
       <change beforePath="$PROJECT_DIR$/templates/pages-account-settings-account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages-account-settings-account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/roles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/roles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
-    <list id="c06ffc81-b1e1-4f56-b1f9-fec773639152" name="Changes by omadbek" comment="">
-      <change beforePath="$PROJECT_DIR$/graphics/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/urls.py" afterDir="false" />
-    </list>
+    <list id="cd073904-1a7b-4320-99e7-e577b195aa33" name="Changes by farxodbek" comment="" />
+    <list id="c06ffc81-b1e1-4f56-b1f9-fec773639152" name="Changes by omadbek" comment="" />
     <list id="d873549f-6f0b-4352-9e9c-ebe2ee3098b0" name="Changes by otabek" comment="" />
-    <list id="cb62c8a7-02e3-4116-b904-cb8554ece2f9" name="Changes by xurshidbek" comment="" />
+    <list id="cb62c8a7-02e3-4116-b904-cb8554ece2f9" name="Changes by xurshidbek" comment="">
+      <change beforePath="$PROJECT_DIR$/templates/auth-forgot-password-basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth-forgot-password-basic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth-login-basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth-login-basic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth-register-basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth-register-basic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/file_upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/file_upload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/files.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/files.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages-account-settings-account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages-account-settings-account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/recieved.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/recieved_file.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/recieved_file.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/roles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/roles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tables-basic.html" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,6 +66,53 @@
     &quot;accountId&quot;: &quot;1e8db173-4fc4-4c6f-8d73-a205531b80ad&quot;
   }
 }</component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/templates/roles.html">
+      <ranges>
+        <range start1="1" end1="1" start2="1" end2="7" changelist="cb62c8a7-02e3-4116-b904-cb8554ece2f9" />
+        <range start1="5" end1="8" start2="11" end2="11" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/templates/file_upload.html">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="8" changelist="cb62c8a7-02e3-4116-b904-cb8554ece2f9" />
+        <range start1="5" end1="8" start2="11" end2="11" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="10" end1="11" start2="13" end2="14" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/templates/categories.html">
+      <ranges>
+        <range start1="1" end1="1" start2="1" end2="7" changelist="cb62c8a7-02e3-4116-b904-cb8554ece2f9" />
+        <range start1="5" end1="8" start2="11" end2="11" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="148" end1="149" start2="151" end2="152" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/templates/pages-account-settings-account.html">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="9" changelist="cb62c8a7-02e3-4116-b904-cb8554ece2f9" />
+        <range start1="4" end1="5" start2="11" end2="11" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="6" end1="9" start2="12" end2="12" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="20" end1="21" start2="23" end2="24" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="35" end1="36" start2="38" end2="39" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="49" end1="50" start2="52" end2="53" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="52" end1="53" start2="55" end2="56" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="73" end1="73" start2="76" end2="81" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="99" end1="99" start2="107" end2="120" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="102" end1="104" start2="123" end2="125" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="110" end1="139" start2="131" end2="160" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/templates/files.html">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="8" changelist="cb62c8a7-02e3-4116-b904-cb8554ece2f9" />
+        <range start1="5" end1="8" start2="11" end2="11" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="85" end1="85" start2="88" end2="125" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="95" end1="103" start2="135" end2="143" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="108" end1="109" start2="148" end2="153" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+        <range start1="119" end1="120" start2="163" end2="165" changelist="ec75df60-4b69-45c1-8f72-9b28c38871d2" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -182,7 +236,7 @@
       <workItem from="1717080453457" duration="931000" />
       <workItem from="1717081936291" duration="4124000" />
       <workItem from="1717135514735" duration="1706000" />
-      <workItem from="1717155527994" duration="5959000" />
+      <workItem from="1717155527994" duration="12227000" />
     </task>
     <servers />
   </component>

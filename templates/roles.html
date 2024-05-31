@@ -1,11 +1,14 @@
 {% extends 'header.html' %}
+{% block title %}
+<title>Lavozimlar</title>
+{% endblock %}
+{% block direction %}
+    <h4 style="margin-top: 10px" class="fw-bold py-3">Lavozimlar</h4>
+{% endblock %}
 {% block content %}
     {% load static %}
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Lavozimlar</h4>
-
-        <!-- Basic Bootstrap Table -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-header">Lavozimlar ro'yxati</h5>

@@ -1,11 +1,14 @@
 {% extends 'header.html' %}
 {% load static %}
+{% block title %}
+    <title>Fayllar</title>
+{% endblock %}
+{% block direction %}
+    <h4 style="margin-top: 10px" class="fw-bold py-3"><span class="text-muted fw-light">{{ user.full_name }} / </span>Fayllar</h4>
+{% endblock %}
 {% block content %}
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">{{ user.username }} /</span>
-            Fayllar</h4>
-
         <!-- Basic Bootstrap Table -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -83,6 +86,43 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li style="margin-left: 10px" class="page-item">
+                                <div class="btn-group">
+                                    <button type="button"
+                                            class="btn btn-outline-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-filter"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" style="">
+                                        <li><a class="dropdown-item" href="?filter=unread">O'qilmaganlar</a></li>
+                                        <li><a class="dropdown-item" href="?filter=isNotCompleted">Bajarilmaganlar</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="?filter=none">Tozalash</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li style="margin-left: 10px" class="page-item">
+                                <div class="btn-group">
+                                    <button type="button"
+                                            class="btn btn-outline-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-sort-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" style="">
+                                        <li><a class="dropdown-item" href="?sort=uploaded_date">Sana bo'yicha
+                                            (Yangilari)</a></li>
+                                        <li><a class="dropdown-item" href="?sort=-uploaded_date">Sana bo'yicha
+                                            (Eskilari)</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="?sort=none">Tozalash</a></li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -93,20 +133,24 @@
             <div style="min-height: 130px; max-height: 600px" class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
-{#                    <tr>#}
-{#                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Nomi</th>#}
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Nomi</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Holat</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuboruvchi</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Qabul qiluvchi</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yaratilgan vaqti</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuklash</th>
+                    {#                    <tr>#}
+                    {#                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Nomi</th>#}
+                    <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Nomi</th>
+                    <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Holat</th>
+                    <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuboruvchi</th>
+                    <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Qabul qiluvchi</th>
+                    <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yaratilgan vaqti</th>
+                    <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuklash</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                     {% for file in files %}
                         <tr>
-                            <td><a href="/file/detail/{{ file.id }}">{{ file.description }}</a></td>
+                            <td><a href="/file/detail/{{ file.id }}">{{ file.description }}</a>
+                                {% if file.is_read == False %}
+                                    <i style="color: red" class="menu-icon tf-icons bx bxs-envelope"></i>
+                                {% endif %}
+                            </td>
                             <td> {% if file.user == user %}
                                 <i class="menu-icon tf-icons bx bx-upload"></i>
                             {% elif file.to_user == user %}
@@ -117,7 +161,8 @@
                             <td>{{ file.uploaded_date }}</td>
                             <td>
                                 {% if file.file %}
-                                    <a href="{{ file.file.url }}" download="{{ file.file.name }}"><i class="menu-icon tf-icons bx bx-file"></i></a>
+                                    <a href="{{ file.file.url }}" download="{{ file.file.name }}"><i
+                                            class="menu-icon tf-icons bx bx-file"></i></a>
                                 {% else %}
                                     No file uploaded
                                 {% endif %}

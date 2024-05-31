@@ -1,14 +1,17 @@
 {% extends 'header.html' %}
 {% load static %}
+{% block title %}
+<title>Fayl ma'lumotlari</title>
+{% endblock %}
+{% block direction %}
+    <h4 style="margin-top: 10px" class="fw-bold py-3"><span class="text-muted fw-light">{{ user.full_name }} / </span>Fayl haqida</h4>
+{% endblock %}
 {% block content %}
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y" xmlns="http://www.w3.org/1999/html">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">{{ user.username }} /</span>
-            Fayllar</h4>
-
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Basic with Icons</h5>
+                <h5 class="mb-0">Fayl ma'lumotlari</h5>
             </div>
             <div class="card-body">
                 <div class="row g-2">

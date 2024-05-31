@@ -67,7 +67,8 @@ class LogoutView(View):
 class ProfileView(View):
     def get(self, request):
         context = {
-            "user": request.user
+            "user": request.user,
+            "roles": Role.objects.all()
         }
         return render(request, 'pages-account-settings-account.html', context)
 
@@ -82,16 +83,8 @@ class ProfileView(View):
                 user.email = request.POST.get("email")
             if request.FILES.get("photo"):
                 user.picture = request.FILES.get("photo")
-            if request.POST.get("organization"):
-                user.organization = request.POST.get("organization")
             if request.POST.get("phoneNumber"):
                 user.phone = request.POST.get("phoneNumber")
-            if request.POST.get("address"):
-                user.address = request.POST.get("address")
-            if request.POST.get("district"):
-                user.district = request.POST.get("district")
-            if request.POST.get("region"):
-                user.region = request.POST.get("region")
             user.save()
             return redirect('/user/profile')
         return redirect('/user/login')

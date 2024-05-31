@@ -1,9 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import json
-from django.db.models import Q
+from django.db.models import OuterRef, Subquery, Q
 from django.views import View
 from users.models import User
 from .models import *
@@ -40,6 +37,7 @@ class FilesView(View):
         if request.user.is_authenticated:
             if category != "all":
                 category = get_object_or_404(Category, title__iexact=category)
+
             if typef == "data":
                 files = File.objects.filter(
                     Q(user=request.user) | Q(to_user=request.user)
@@ -48,11 +46,21 @@ class FilesView(View):
                 if category == "all":
                     files = File.objects.filter(
                         to_user=request.user,
+                    ).annotate(
+                        is_read=Subquery(
+                            RecievedFiles.objects.filter(
+                                file=OuterRef('pk')
+                            ).values('isRead')[:1])
                     )
                 else:
                     files = File.objects.filter(
                         to_user=request.user,
                         category=category,
+                    ).annotate(
+                        is_read=Subquery(
+                            RecievedFiles.objects.filter(
+                                file=OuterRef('pk')
+                            ).values('isRead')[:1])
                     )
             elif typef == "from":
                 if category == "all":
@@ -64,15 +72,29 @@ class FilesView(View):
                         user=request.user,
                         category=category,
                     )
-
             else:
                 return render(request, '404.html')
-            per_page = request.GET.get('per_page', 10)
-            roles = Role.objects.all()
-            users = User.objects.exclude(id=request.user.id)
+
+            # Handle Filtering
+            filter_by = request.GET.get('filter')
+            if filter_by:
+                if filter_by == 'unread':
+                    unread_received_files = RecievedFiles.objects.filter(isRead=False, file__to_user=request.user)
+                    files = File.objects.filter(id__in=unread_received_files.values('file_id'))
+                elif filter_by == 'isNotCompleted':
+                    undonefiles = RecievedFiles.objects.filter(isCompleted=False, file__to_user=request.user, file__category__is_done_required=True)
+                    files = File.objects.filter(id__in=undonefiles.values('file_id'))
+
+
+            sort_by = request.GET.get('sort')
+            if sort_by=="uploaded_date":
+                files = files.order_by("-uploaded_date")
+            elif sort_by=="-uploaded_date":
+                files = files.order_by("uploaded_date")
 
             # Pagination
-            paginator = Paginator(files.order_by("-uploaded_date"), per_page)
+            per_page = request.GET.get('per_page', 10)
+            paginator = Paginator(files, per_page)
             page = request.GET.get('page')
 
             try:
@@ -81,14 +103,16 @@ class FilesView(View):
                 paginated_files = paginator.page(1)
             except EmptyPage:
                 paginated_files = paginator.page(paginator.num_pages)
+
             context = {
                 'per_page': int(per_page),
                 "files": paginated_files,
                 "user_by": request.user,
+                'categories': Category.objects.all(),  # Include categories for filtering
+                'users': User.objects.all(),  # Include users for filtering
             }
             return render(request, 'files.html', context)
         return redirect('login')
-
 
 
 class UploadFileView(View):
@@ -177,6 +201,7 @@ class CategoriesView(View):
                 category = Category.objects.get(id=request.POST.get('cid'))
                 category.title = request.POST.get('title').title()
                 category.is_active = True if request.POST.get('is_active') == "on" else False
+                category.is_done_required = True if request.POST.get('is_done_required') == "on" else False
                 category.save()
             return redirect('categories')
         return redirect('login')

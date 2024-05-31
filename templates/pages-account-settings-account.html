@@ -1,12 +1,15 @@
 {% extends 'header.html' %}
 {% load static %}
+{% block title %}
+    <title>Profil</title>
+{% endblock %}
+{% block direction %}
+    <h4 style="margin-top: 10px" class="fw-bold py-3"><span class="text-muted fw-light">{{ user.full_name }} / </span>Fayl
+        haqida</h4>
+{% endblock %}
 {% block content %}
     <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account
-        </h4>
-
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
@@ -18,7 +21,7 @@
                 <div class="card mb-4">
                     <form id="formAccountSettings" enctype="multipart/form-data"
                           method="POST">{% csrf_token %}
-                        <h5 class="card-header">Profile Details</h5>
+                        <h5 class="card-header">Profil ma'lumotlari</h5>
                         <!-- Account -->
                         <div class="card-body">
                             <div class="d-flex align-items-start align-items-sm-center gap-4">
@@ -33,7 +36,7 @@
 
                                 <div class="button-wrapper">
                                     <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                        <span class="d-none d-sm-block">Upload new photo</span>
+                                        <span class="d-none d-sm-block">Yangi rasm yuklash</span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
                                         <input
                                                 type="file"
@@ -47,10 +50,10 @@
                                     <button type="button"
                                             class="btn btn-outline-secondary account-image-reset mb-4">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Reset</span>
+                                        <span class="d-none d-sm-block">Ortga</span>
                                     </button>
 
-                                    <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                                    <p class="text-muted mb-0">Ruxsat etilgan JPG, GIF yoki PNG. Max hajm 800K</p>
                                 </div>
                             </div>
                         </div>
@@ -71,6 +74,11 @@
                                     <label for="lastName" class="form-label">Familiya</label>
                                     <input class="form-control" type="text" name="lastName" id="lastName"
                                            value="{{ user.last_name }}"/>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="lastName" class="form-label">Username</label>
+                                    <input class="form-control" type="text" name="lastName" id="lastName"
+                                           value="{{ user.username }}"/>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">E-mail</label>
@@ -97,46 +105,58 @@
                                         />
                                     </div>
                                 </div>
+                                <div class="col mb-3">
+                                    <label class="form-label" for="role">Lavozim </label>
+                                    <div class="input-group input-group-merge">
+                                        <select class="form-control" name="role" required>
+                                            <option value="" disabled selected>Qabul qiluvchini tanlang</option>
+                                            {% for roles in roles %}
+                                                <option
+                                                        value="{{ role.id }}">{{ role.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-primary me-2">Saqlash</button>
+                                <button type="reset" class="btn btn-outline-secondary">Bekor qilish</button>
                             </div>
                         </div>
                     </form>
                     <!-- /Account -->
 
                 </div>
-{#                <div class="card">#}
-{#                    <h5 class="card-header">Delete Account</h5>#}
-{#                    <div class="card-body">#}
-{#                        <div class="mb-3 col-12 mb-0">#}
-{#                            <div class="alert alert-warning">#}
-{#                                <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your#}
-{#                                    account?</h6>#}
-{#                                <p class="mb-0">Once you delete your account, there is no going back. Please#}
-{#                                    be certain.</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <form id="formAccountDeactivation" onsubmit="return false">#}
-{#                            <div class="form-check mb-3">#}
-{#                                <input#}
-{#                                        class="form-check-input"#}
-{#                                        type="checkbox"#}
-{#                                        name="accountActivation"#}
-{#                                        id="accountActivation"#}
-{#                                />#}
-{#                                <label class="form-check-label" for="accountActivation"#}
-{#                                >I confirm my account deactivation</label#}
-{#                                >#}
-{#                            </div>#}
-{#                            <button type="submit" class="btn btn-danger deactivate-account">Deactivate#}
-{#                                Account#}
-{#                            </button>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
+                {#                <div class="card">#}
+                {#                    <h5 class="card-header">Delete Account</h5>#}
+                {#                    <div class="card-body">#}
+                {#                        <div class="mb-3 col-12 mb-0">#}
+                {#                            <div class="alert alert-warning">#}
+                {#                                <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your#}
+                {#                                    account?</h6>#}
+                {#                                <p class="mb-0">Once you delete your account, there is no going back. Please#}
+                {#                                    be certain.</p>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                        <form id="formAccountDeactivation" onsubmit="return false">#}
+                {#                            <div class="form-check mb-3">#}
+                {#                                <input#}
+                {#                                        class="form-check-input"#}
+                {#                                        type="checkbox"#}
+                {#                                        name="accountActivation"#}
+                {#                                        id="accountActivation"#}
+                {#                                />#}
+                {#                                <label class="form-check-label" for="accountActivation"#}
+                {#                                >I confirm my account deactivation</label#}
+                {#                                >#}
+                {#                            </div>#}
+                {#                            <button type="submit" class="btn btn-danger deactivate-account">Deactivate#}
+                {#                                Account#}
+                {#                            </button>#}
+                {#                        </form>#}
+                {#                    </div>#}
+                {#                </div>#}
             </div>
         </div>
     </div>
