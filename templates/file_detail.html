@@ -21,21 +21,31 @@
                         </div>
                     </div>
                     <div class="col mb-3">
-                        <label class="form-label"
-                               for="exampleFormControlReadOnlyInput basic-icon-default-email">Kimdan:</label>
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-user-check"></i></span>
-                            <input class="form-control" id="exampleFormControlReadOnlyInput1" type="text"
-                                   value="  {{ file.user.full_name }}" readonly>
-                        </div>
+                        {% if file.to_user == user %}
+                            <label class="form-label"
+                                   for="exampleFormControlReadOnlyInput basic-icon-default-email">Kimdan:</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-user-check"></i></span>
+                                <input class="form-control" id="exampleFormControlReadOnlyInput1" type="text"
+                                       value="  {{ file.user.full_name }}" readonly>
+                            </div>
+                        {% elif file.user == user %}
+                            <label class="form-label"
+                                   for="exampleFormControlReadOnlyInput basic-icon-default-email">Kimga:</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-user-check"></i></span>
+                                <input class="form-control" id="exampleFormControlReadOnlyInput1" type="text"
+                                       value="  {{ file.to_user.full_name }}" readonly>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="exampleFormControlReadOnlyInput1">Izoh</label>
                     <div class="input-group input-group-merge">
-                                        <span id="basic-icon-default-message2" class="input-group-text">
-                                            <i class="bx bx-comment"></i>
-                                        </span>
+                        <span id="basic-icon-default-message2" class="input-group-text">
+                            <i class="bx bx-comment"></i>
+                        </span>
                         <textarea
                                 id="basic-icon-default-message"
                                 name="desc"
@@ -53,46 +63,40 @@
                                             <i class="bx bxs-file"></i>
                                         </span>
                         <a type="file"
-                            class="form-control"
-                            id="file"
-                            href="/file/"
-                            aria-readonly="true">{{ file.file }}</a>
+                           class="form-control"
+                           id="file"
+                           href="{{ file.file.url }}" download="{{ file.file.name }}"
+                           aria-readonly="true">{{ file.file }}</a>
                     </div>
                 </div>
             </div>
             <!--/ Basic Bootstrap Table -->
             <!--Second form -->
+            {% if file.category.is_done_required %}
             <div class="card-body">
                 <form method="post"> {% csrf_token %}
                     <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-message">Izoh</label>
                         <div class="input-group input-group-merge">
-                                        <span id="basic-icon-default-message2" class="input-group-text">
-                                            <i class="bx bx-comment"></i>
-                                        </span>
+                            <span id="basic-icon-default-message2" class="input-group-text">
+                                <i class="bx bx-comment"></i>
+                            </span>
                             <textarea
                                     id="basic-icon-default-message"
                                     name="desc" required
                                     class="form-control"
                                     placeholder="Izohingizni kiritng... "
                                     aria-label="Izohingizni kiritng..."
-                                    aria-describedby="basic-icon-default-message2"></textarea>
+                                    aria-describedby="basic-icon-default-message2"
+                                    {% if recieved.file.to_user != request.user %} disabled {% endif %}>{% if recieved.comment %} {{ recieved.comment }} {% endif %}</textarea>
                         </div>
                     </div>
-                    <div class="mb-3">
-
-                        <div class="input-group input-group-merge">
-
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Bajarildi: </label>
-                            <div style="margin-left: 10px" class="form-check form-switch mb-2">
-                                <input name="isCompleted" id="flexSwitchCheckChecked" class="form-check-input"
-                                       type="checkbox" required>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Yuborish</button>
+                    {% if file.to_user == user %}
+                        <button type="submit" class="btn btn-primary">Yuborish</button>
+                    {% endif %}
                 </form>
             </div>
+            {% endif %}
             <!--/Second form -->
         </div>
     </div>

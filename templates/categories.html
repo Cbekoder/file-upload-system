@@ -21,7 +21,7 @@
                     <form method="post">{% csrf_token %}
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel1">Yangi jild</h5>
+                                <h5 class="modal-title" id="exampleModalLabel1">Yangi kategoriya</h5>
                                 <button
                                         type="button"
                                         class="btn-close"
@@ -33,9 +33,22 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col mb-3">
-                                        <label for="nameBasic" class="form-label">Jild nomi</label>
+                                        <label for="nameBasic" class="form-label">Kategoriya nomi</label>
                                         <input type="text" id="nameBasic" name="title" class="form-control"
-                                               placeholder="Asosiy jild" required autofocus/>
+                                               placeholder="Asosiy kategoriya" required autofocus/>
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <div class="input-group input-group-merge">
+                                        <label class="form-check-label"
+                                               for="is_active">Bajarish talabi: </label>
+                                        <div style="margin-left: 10px"
+                                             class="form-check form-switch mb-2">
+                                            <input name="is_done_required"
+                                                   id="is_active"
+                                                   class="form-check-input"
+                                                   type="checkbox" checked>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -59,33 +72,26 @@
                         <th>№</th>
                         <th>Nomi</th>
                         <th>Soni</th>
-                        <th>Actions</th>
+                        <th>Tahrirlash</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                     {% for c in categories %}
                         <tr>
-                            <td>{{forloop.counter }}</td>
-                            <td><a href="{{ c.id }}">
-                                <i class="menu-icon tf-icons bx bxs-network-chart"></i><strong>{{ c.title }}</strong>
-                            </a></td>
+                            <td>{{ forloop.counter }}</td>
+                            <td style="cursor: pointer"
+                                data-bs-toggle="modal"
+                                data-bs-target="#ModalEdit{{ c.id }}">
+                                <i class="menu-icon tf-icons bx bx-category"></i><strong>{{ c.title }}</strong>
+                            </td>
                             <td>{{ c.file_set.count }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalEdit{{ c.id }}">
+                                        <i class="bx bx-edit-alt me-1"></i>
                                     </button>
-                                    <div class="dropdown-menu">
-                                        <button class="dropdown-item"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#ModalEdit{{ c.id }}">
-                                            <i class="bx bx-edit-alt me-1"></i> Tahrirlash
-                                        </button>
-                                        <a class="dropdown-item" href="/edit/delc/{{ c.id }}"
-                                        ><i class="bx bx-trash me-1"></i> O'chirish</a
-                                        >
-                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -95,7 +101,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel1">
-                                                Jildni tahrirlash</h5>
+                                                Kategoriyani tahrirlash</h5>
                                             <button
                                                     type="button"
                                                     class="btn-close"
@@ -109,10 +115,42 @@
                                             <div class="row">
                                                 <div class="col mb-3">
                                                     <label for="nameBasic" class="form-label">
-                                                        Jild nomi</label>
+                                                        Kategoriya nomi</label>
                                                     <input type="text" id="nameBasic" name="title"
                                                            class="form-control" value="{{ c.title }}"
                                                            required autofocus/>
+                                                </div>
+                                                <div class="row g-2">
+                                                    <div class="col mb-3">
+                                                        <div class="input-group input-group-merge">
+                                                            <label class="form-check-label"
+                                                                   for="is_active">Faol: </label>
+                                                            <div style="margin-left: 10px"
+                                                                 class="form-check form-switch mb-2">
+                                                                <input name="is_active"
+                                                                       id="is_active"
+                                                                       class="form-check-input"
+                                                                       type="checkbox"
+                                                                        {% if c.is_active %} checked {% endif %}
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-3">
+                                                        <div class="input-group input-group-merge">
+                                                            <label class="form-check-label"
+                                                                   for="is_done_required">Bajarish talabi: </label>
+                                                            <div style="margin-left: 10px"
+                                                                 class="form-check form-switch mb-2">
+                                                                <input name="is_done_required"
+                                                                       id="is_done_required"
+                                                                       class="form-check-input"
+                                                                       type="checkbox"
+                                                                        {% if c.is_active %} checked {% endif %}
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,5 +173,5 @@
             </div>
         </div>
     </div>
-        <!--/ Basic Bootstrap Table -->
+    <!--/ Basic Bootstrap Table -->
 {% endblock %}

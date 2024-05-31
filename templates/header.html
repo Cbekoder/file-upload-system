@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_filters %}
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -139,7 +140,7 @@
                 <li class="menu-item active">
                     <a class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Dashboard</div>
+                        <div data-i18n="Analytics">Asosiy</div>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -152,7 +153,7 @@
                 <!-- Layouts -->
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-layout"></i>
+                        <i class="menu-icon tf-icons bx bxs-send"></i>
                         <div data-i18n="Layouts">Yuborilgan</div>
                     </a>
 
@@ -162,7 +163,7 @@
                                 <div data-i18n="Without menu">Hammasi</div>
                             </a>
                         </li>
-                        {% for category in categories %}
+                        {% for category in icategories %}
                             <li class="menu-item">
                                 <a href="/files/from/{{ category.title|lower }}" class="menu-link">
                                     <div data-i18n="Without menu">{{ category.title }}</div>
@@ -173,7 +174,7 @@
                 </li>
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-layout"></i>
+                        <i class="menu-icon tf-icons bx bxs-inbox"></i>
                         <div data-i18n="Layouts">Kiruvchilar</div>
                         {% if notifications %}
                             <div class="badge bg-danger rounded-pill ms-auto">{{ notifications.all }}</div>
@@ -186,12 +187,16 @@
                                 <div data-i18n="Without menu">Hammasi</div>
                             </a>
                         </li>
-                        {% for category in categories %}
+                        {% for category in icategories %}
                             <li class="menu-item">
                                 <a href="/files/to/{{ category.title|lower }}" class="menu-link">
                                     <div data-i18n="Without menu">{{ category.title }}</div>
-                                    {% if category.id in notifications.all_categories %}
-                                        <div class="badge bg-danger rounded-pill ms-auto">{{ notifications.category.id }}</div>
+                                    {% if category.id in notifications %}
+                                        {% with notifications|get_item:category.id as notification_count %}
+                                            <div class="badge bg-danger rounded-pill ms-auto">
+                                                {{ notification_count }}
+                                            </div>
+                                        {% endwith %}
                                     {% endif %}
                                 </a>
                             </li>
@@ -200,7 +205,7 @@
                 </li>
                 {% if request.user.is_staff %}
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Pages</span>
+                        <span class="menu-header-text">Qo'shimcha</span>
                     </li>
                     <li class="menu-item">
                         <a class="menu-link" href="/roles/">
@@ -210,7 +215,7 @@
                     </li>
                     <li class="menu-item">
                         <a class="menu-link" href="/categories/">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-category"></i>
                             <div data-i18n="Analytics">Kategoriya</div>
                         </a>
                     </li>

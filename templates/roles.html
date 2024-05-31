@@ -65,27 +65,20 @@
                     <tbody class="table-border-bottom-0">
                     {% for c in roles %}
                         <tr>
-                            <td>{{forloop.counter }}</td>
-                            <td><a href="{{ c.id }}">
-                                <i class="menu-icon tf-icons bx bxs-network-chart"></i><strong>{{ c.title }}</strong>
-                            </a></td>
+                            <td>{{ forloop.counter }}</td>
+                            <td style="cursor: pointer"
+                                    data-bs-toggle="modal"
+                                data-bs-target="#ModalEdit{{ c.id }}">
+                                <i class="menu-icon tf-icons bx bxs-user-account"></i><strong>{{ c.title }}</strong>
+                            </td>
                             <td>{{ c.user_set.count }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalEdit{{ c.id }}">
+                                        <i class="bx bx-edit-alt me-1"></i>
                                     </button>
-                                    <div class="dropdown-menu">
-                                        <button class="dropdown-item"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#ModalEdit{{ c.id }}">
-                                            <i class="bx bx-edit-alt me-1"></i> Tahrirlash
-                                        </button>
-                                        <a class="dropdown-item" href="/edit/delc/{{ c.id }}"
-                                        ><i class="bx bx-trash me-1"></i> O'chirish</a
-                                        >
-                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -109,7 +102,7 @@
                                             <div class="row">
                                                 <div class="col mb-3">
                                                     <label for="nameBasic" class="form-label">
-                                                        Jild nomi</label>
+                                                        Lavozim nomi</label>
                                                     <input type="text" id="nameBasic" name="title"
                                                            class="form-control" value="{{ c.title }}"
                                                            required autofocus/>

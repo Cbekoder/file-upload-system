@@ -10,7 +10,7 @@ from .models import *
 
 
 def UserNotifications(user):
-    categories = Category.objects.all()
+    categories = Category.objects.filter(is_active=True)
     notifications = {}
     all_notifications = 0
     all_categories = []
@@ -32,14 +32,7 @@ def UserNotifications(user):
 class IndexView(View):
     def get(self, request):
         if request.user.is_authenticated:
-            categories = Category.objects.all()
-            notifications = UserNotifications(request.user)
-            context = {
-                "user": request.user,
-                "categories": categories,
-                'notifications': notifications,
-            }
-            return render(request, 'index.html', context)
+            return render(request, 'index.html',)
         return redirect('login')
 
 class FilesView(View):
@@ -75,7 +68,6 @@ class FilesView(View):
             else:
                 return render(request, '404.html')
             per_page = request.GET.get('per_page', 10)
-            categories = Category.objects.all()
             roles = Role.objects.all()
             users = User.objects.exclude(id=request.user.id)
 
@@ -90,10 +82,6 @@ class FilesView(View):
             except EmptyPage:
                 paginated_files = paginator.page(paginator.num_pages)
             context = {
-                "user": request.user,
-                "categories": categories,
-                "roles": roles,
-                "users": users,
                 'per_page': int(per_page),
                 "files": paginated_files,
                 "user_by": request.user,
@@ -126,7 +114,6 @@ class UploadFileView(View):
             category_id = request.POST.get('category')
             category_instance = get_object_or_404(Category, pk=category_id)
             to_user = get_object_or_404(User, id=to_user_id)
-
             uploaded_file = request.FILES.get('file')
 
             file_instance = File.objects.create(
@@ -147,12 +134,13 @@ class FileDetailView(View):
         if request.user.is_authenticated:
             categories = Category.objects.all()
             file = File.objects.get(id=pk)
+            recieved = RecievedFiles.objects.filter(file=file).first()
             if file.to_user == request.user:
-                fileR = RecievedFiles.objects.get(file=file)
-                fileR.is_read = True
-                fileR.save()
+                recieved.isRead = True
+                recieved.save()
             context = {
                 "user": request.user,
+                "recieved": recieved,
                 "categories": categories,
                 "file": file,
             }
@@ -160,52 +148,15 @@ class FileDetailView(View):
         return redirect('login/')
     def post(self, request, pk):
         if request.user.is_authenticated:
-            if request.POST.get('isCompleted')=="on":
-                ren=True
-            else:
-                ren=False
-            category_id = request.POST.get('category')
-            RecievedFiles.objects.create(
-                file=File.objects.get(id=pk),
-                comment=request.POST.get('desc'),
-                isRead=res,
-                isCompleted=ren,
-            )
-            return redirect(f'/files/from/arizalar/')
-        return redirect('files/')
+            file = File.objects.get(id=pk)
+            received = RecievedFiles.objects.get(file=file)
+            received.comment = request.POST.get('desc')
+            received.isCompleted = True
+            received.save()
+            return redirect(f'/files/to/{file.category.title.lower()}/')
+        return redirect('login')
 
-class RecFiles(View):
-    def get(self,request):
-        context={
-            "recfiles": RecievedFiles.objects.all()
-        }
-        return render(request, "recieved.html", context)
 
-# class FileDetailView(View):
-#     def get(self, request, type, category, pk):
-#         if request.user.is_authenticated:
-#             try:
-#                 file = File.objects.get(id=pk, to_user=request.user)
-#                 context = {
-#                     "file": file,
-#                     "type": type,
-#                     "category": category,
-#                 }
-#                 return render(request, "file_detail.html", context)
-#             except File.DoesNotExist:
-#                 return redirect('file-not-found/')
-#         return redirect('login/')
-#
-#     def post(self,request, pk):
-#         if request.user.is_authenticated:
-#             RecievedFiles.objects.create(
-#                 file=request.POST.get('file'),
-#                 comment=request.POST.get('comment'),
-#                 isRead=request.POST.get('isRead'),
-#                 isCompleted=request.POST.get('isCompleted'),
-#             )
-#             return redirect(f'/files/from/{Category.objects.get(id=pk).title.lower()}/')
-#         return redirect('login')
 class CategoriesView(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -223,9 +174,10 @@ class CategoriesView(View):
                     title=request.POST.get('title').title(),
                 )
             elif request.POST.get('action') == 'alter':
-                group = Category.objects.get(id=request.POST.get('cid'))
-                group.title = request.POST.get('title').title()
-                group.save()
+                category = Category.objects.get(id=request.POST.get('cid'))
+                category.title = request.POST.get('title').title()
+                category.is_active = True if request.POST.get('is_active') == "on" else False
+                category.save()
             return redirect('categories')
         return redirect('login')
 
@@ -236,7 +188,7 @@ class RolesView(View):
                 "user": request.user,
                 'roles': Role.objects.all()
             }
-            return render(request, 'categories.html', context)
+            return render(request, 'roles.html', context)
         return redirect('login')
 
     def post(self, request):
@@ -246,16 +198,14 @@ class RolesView(View):
                     title=request.POST.get('title').title(),
                 )
             elif request.POST.get('action') == 'alter':
-                group = Role.objects.get(id=request.POST.get('cid'))
-                group.title = request.POST.get('title').title()
-                group.save()
-            return redirect('categories')
+                role = Role.objects.get(id=request.POST.get('cid'))
+                role.title = request.POST.get('title').title()
+                role.save()
+            return redirect('roles')
         return redirect('login')
 
 
 
-def download_files(request):
-    pass
 
 
 #
@@ -274,6 +224,3 @@ def download_files(request):
 #         return redirect(f'/edit/groups/{group_id.id}')
 #     return redirect('login')
 #
-
-
-

@@ -12,34 +12,37 @@
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-                    <div class="col mb-3">
-                        <label class="form-label" for="basic-icon-default-email">Kimga:</label>
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-user-check"></i></span>
-                            <select class="input-group-text" name="to_user">
-                                <option class="dropdown-menu" selected disabled>Qabul qiluvchini tanlang</option>
-                                {% for user in users %}
-                                    <option class="dropdown-menu show "
-                                            value="{{ user.id }}">{{ user.full_name }}</option>
-                                {% endfor %}
-                            </select>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label class="form-label" for="exampleFormControlReadOnlyInput basic-icon-default-email">Kategoriya:</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text">
+                                    <i class="bx bx-category"></i>
+                                </span>
+                                <select class="form-control" name="category" required>
+                                    <option value="" disabled selected>Fayl kategoriyasini tanlang</option>
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <label class="form-label"
+                                   for="exampleFormControlReadOnlyInput basic-icon-default-email">Kimga:</label>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text"><i class="bx bx-user-check"></i></span>
+                                <select class="form-control" name="to_user" required>
+                                    <option value="" disabled selected>Qabul qiluvchini tanlang</option>
+                                    {% for user in users %}
+                                        <option class="dropdown-menu show "
+                                                value="{{ user.id }}">{{ user.full_name }} ({{ user.role.title }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-company">Kategoriya</label>
-                        <div class="input-group input-group-merge" >
-                            <span id="basic-icon-default-company2" class="input-group-text">
-                                <i class="bx bx-category"></i>
-                            </span>
-                            <select class="input-group-text" name="category">
-                                <option class="dropdown-menu" selected disabled>Fayl kategoriyasini tanlang</option>
-                                {% for category in categories %}
-                                    <option value="{{ category.id }}">{{ category.title }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-message">Izoh</label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-message2" class="input-group-text">
@@ -47,7 +50,7 @@
                             </span>
                             <textarea
                                     id="basic-icon-default-message"
-                                    name="desc"
+                                    name="desc" required
                                     class="form-control"
                                     placeholder="Ushbu fayl...."
                                     aria-label="Ushbu fayl...."
@@ -64,12 +67,12 @@
                                     type="file"
                                     class="form-control"
                                     id="file"
-                                    name="file"/>
+                                    name="file" required/>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Yuborish</button>
                 </form>
-            </div>                   
+            </div>
         </div>
     </div>
     <!-- / Content -->

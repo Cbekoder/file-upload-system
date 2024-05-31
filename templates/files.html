@@ -101,16 +101,11 @@
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Qabul qiluvchi</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yaratilgan vaqti</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuklash</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Actions</th>
-
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                     {% for file in files %}
                         <tr>
-{#                            <td><a href="{{ file.id }}">#}
-{#                                <i class="menu-icon tf-icons bx bx-file"></i><strong>{{ file.file.name }}</strong>#}
-{#                            </a></td>#}
                             <td><a href="/file/detail/{{ file.id }}">{{ file.description }}</a></td>
                             <td> {% if file.user == user %}
                                 <i class="menu-icon tf-icons bx bx-upload"></i>
@@ -126,22 +121,6 @@
                                 {% else %}
                                     No file uploaded
                                 {% endif %}
-                            </td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a href="/file/edit/{{ file.id }}" class="dropdown-item">
-                                            <i class="bx bx-edit-alt me-1"></i> Tahrirlash
-                                        </a>
-                                        <a class="dropdown-item" href="/edit/delfile/{{ file.id }}">
-                                            <i class="bx bx-trash me-1"></i> O'chirish
-                                        </a>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                     {% endfor %}

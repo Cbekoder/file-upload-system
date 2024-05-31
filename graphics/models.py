@@ -1,5 +1,7 @@
 from django.db import models
 from users.models import User, Role
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
@@ -20,6 +22,15 @@ class File(models.Model):
     def __str__(self):
         return self.description
 
+    def delete(self, *args, **kwargs):
+        self.file.delete()  # Delete the file from the filesystem
+        super().delete(*args, **kwargs)  # Call the parent class delete method
+
+# Signal to ensure files are deleted when a File instance is deleted
+@receiver(post_delete, sender=File)
+def delete_file_on_model_delete(sender, instance, **kwargs):
+    instance.file.delete(False)
+
 
 class RecievedFiles(models.Model):
     file = models.ForeignKey(File, on_delete=models.SET_NULL, null=True)
@@ -27,6 +38,6 @@ class RecievedFiles(models.Model):
     isRead = models.BooleanField(default=False)
     isCompleted = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.file.description
+    # def __str__(self):
+    #     return self.file.description
 
