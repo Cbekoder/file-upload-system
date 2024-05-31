@@ -128,8 +128,8 @@
                 </a>
             </div>
             <a href="/upload_file/"
-                    class="btn rounded-pill btn-primary"
-                    style="padding: 10px; margin: 10px">
+               class="btn rounded-pill btn-primary"
+               style="padding: 10px; margin: 10px">
                 <span class="tf-icons bx bxs-news"></span>&nbsp; Yangi fayl
             </a>
             <div class="menu-inner-shadow"></div>
@@ -144,7 +144,7 @@
                 </li>
                 <li class="menu-item">
                     <a href="/files/data/all/" class="menu-link">
-                        <i class='menu-icon tf-icons bx bxs-network-chart' ></i>
+                        <i class='menu-icon tf-icons bx bxs-network-chart'></i>
                         <div data-i18n="Analytics">Hammasi</div>
                     </a>
                 </li>
@@ -157,6 +157,11 @@
                     </a>
 
                     <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="/files/from/all/" class="menu-link">
+                                <div data-i18n="Without menu">Hammasi</div>
+                            </a>
+                        </li>
                         {% for category in categories %}
                             <li class="menu-item">
                                 <a href="/files/from/{{ category.title|lower }}" class="menu-link">
@@ -171,16 +176,21 @@
                         <i class="menu-icon tf-icons bx bx-layout"></i>
                         <div data-i18n="Layouts">Kiruvchilar</div>
                         {% if notifications %}
-                            <div class="badge bg-danger rounded-pill ms-auto">{{ notifications|length }}</div>
+                            <div class="badge bg-danger rounded-pill ms-auto">{{ notifications.all }}</div>
                         {% endif %}
                     </a>
 
                     <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="/files/to/all/" class="menu-link">
+                                <div data-i18n="Without menu">Hammasi</div>
+                            </a>
+                        </li>
                         {% for category in categories %}
                             <li class="menu-item">
                                 <a href="/files/to/{{ category.title|lower }}" class="menu-link">
                                     <div data-i18n="Without menu">{{ category.title }}</div>
-                                    {% if category.id in notifications %}
+                                    {% if category.id in notifications.all_categories %}
                                         <div class="badge bg-danger rounded-pill ms-auto">{{ notifications.category.id }}</div>
                                     {% endif %}
                                 </a>
@@ -188,80 +198,23 @@
                         {% endfor %}
                     </ul>
                 </li>
-
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Pages</span>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/categories/">
-                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Kategoriya</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Account Settings</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="/user/account/" class="menu-link">
-                                <div data-i18n="Account">Account</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="pages-account-settings-notifications.html" class="menu-link">
-                                <div data-i18n="Notifications">Notifications</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="pages-account-settings-connections.html" class="menu-link">
-                                <div data-i18n="Connections">Connections</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                        <div data-i18n="Authentications">Authentications</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="/user/logout/" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Login</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Register</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Forgot Password</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                        <div data-i18n="Misc">Misc</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="404.html" class="menu-link">
-                                <div data-i18n="Error">Error</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="pages-misc-under-maintenance.html" class="menu-link">
-                                <div data-i18n="Under Maintenance">Under Maintenance</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                {% if request.user.is_staff %}
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Pages</span>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="/roles/">
+                            <i class="menu-icon tf-icons bx bx-male"></i>
+                            <div data-i18n="Analytics">Lavozimlar</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="/categories/">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Kategoriya</div>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </aside>
         <!-- / Menu -->

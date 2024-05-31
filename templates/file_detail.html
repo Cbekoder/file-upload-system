@@ -11,110 +11,59 @@
                 <h5 class="mb-0">Basic with Icons</h5>
             </div>
             <div class="card-body">
-                <form method="get">{% csrf_token %}
-                    <div class="mb-4">
-                        <label class="form-label" for="file">Fayl:</label>
+                <div class="row g-2">
+                    <div class="col mb-3">
+                        <label class="form-label" for="exampleFormControlReadOnlyInput basic-icon-default-email">Kategoriya:</label>
                         <div class="input-group input-group-merge">
-                                        <span id="file2" class="input-group-text">
-                                            <i class="bx bxs-file"></i>
-                                        </span>
-                            <a
-                                    type="file"
-                                    class="form-control"
-                                    id="file"
-                                    href="/file/">{{ file.title }}</a>
+                            <span class="input-group-text"><i class="bx bx-user-check"></i></span>
+                            <input class="form-control" id="exampleFormControlReadOnlyInput1" type="text"
+                                   value="  {{ file.category.title }}" readonly>
                         </div>
                     </div>
-                    <div class="row g-2">
-                        <div class="col mb-3">
-                            <label class="form-label" for="basic-icon-default-company">Kategoriya</label>
-                            <div class="input-group input-group-merge">
-                                            <span id="basic-icon-default-company2" class="input-group-text">
-                                                <i class="bx bx-category"></i>
-                                            </span>
-                                <select class="input-group-text" name="category">
-                                    {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.title }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col mb-3">
-                            <label class="form-label" for="basic-icon-default-email">Kimga:</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-user-check"></i></span>
-                                <select class="input-group-text" name="to_user">
-                                    {% for user in users %}
-                                        <option class="dropdown-menu show "
-                                                value="{{ user.id }}">{{ user.username }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                    <div class="col mb-3">
+                        <label class="form-label"
+                               for="exampleFormControlReadOnlyInput basic-icon-default-email">Kimdan:</label>
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bx-user-check"></i></span>
+                            <input class="form-control" id="exampleFormControlReadOnlyInput1" type="text"
+                                   value="  {{ file.user.full_name }}" readonly>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-message">Izoh</label>
-                        <div class="input-group input-group-merge">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="exampleFormControlReadOnlyInput1">Izoh</label>
+                    <div class="input-group input-group-merge">
                                         <span id="basic-icon-default-message2" class="input-group-text">
                                             <i class="bx bx-comment"></i>
                                         </span>
-                            <textarea
-                                    id="basic-icon-default-message"
-                                    name="desc"
-                                    class="form-control"
-                                    placeholder="Ushbu fayl...."
-                                    aria-label="Ushbu fayl...."
-                                    aria-describedby="basic-icon-default-message2">
-                                        </textarea>
-                        </div>
+                        <textarea
+                                id="basic-icon-default-message"
+                                name="desc"
+                                class="form-control"
+                                value="Ushbu fayl...."
+                                aria-label="Ushbu fayl...."
+                                aria-describedby="basic-icon-default-message2"
+                                readonly>  {{ file.description }}</textarea>
                     </div>
-
-                </form>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="file">Fayl:</label>
+                    <div class="input-group input-group-merge">
+                                        <span id="file2" class="input-group-text">
+                                            <i class="bx bxs-file"></i>
+                                        </span>
+                        <a type="file"
+                            class="form-control"
+                            id="file"
+                            href="/file/"
+                            aria-readonly="true">{{ file.file }}</a>
+                    </div>
+                </div>
             </div>
             <!--/ Basic Bootstrap Table -->
             <!--Second form -->
             <div class="card-body">
-                <form method="postff"> {% csrf_token %}
-                    <div class="mb-4">
-                        <label class="form-label" for="file">Fayl:</label>
-                        <div class="input-group input-group-merge">
-                                        <span id="file2" class="input-group-text">
-                                            <i class="bx bxs-file"></i>
-                                        </span>
-                            <a
-                                    type="file"
-                                    class="form-control"
-                                    id="file"
-                                    href="/file">{{ file.title }}</a>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-3">
-                            <label class="form-label" for="basic-icon-default-company">Kategoriya</label>
-                            <div class="input-group input-group-merge">
-                                            <span id="basic-icon-default-company2" class="input-group-text">
-                                                <i class="bx bx-category"></i>
-                                            </span>
-                                <select class="input-group-text" name="category">
-                                    {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.title }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col mb-3">
-                            <label class="form-label" for="basic-icon-default-email">Kimga:</label>
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-user-check"></i></span>
-                                <select class="input-group-text" name="to_user">
-                                    {% for user in users %}
-                                        <option class="dropdown-menu show "
-                                                value="{{ user.id }}">{{ user.username }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                <form method="post"> {% csrf_token %}
                     <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-message">Izoh</label>
                         <div class="input-group input-group-merge">
@@ -123,12 +72,22 @@
                                         </span>
                             <textarea
                                     id="basic-icon-default-message"
-                                    name="desc"
+                                    name="desc" required
                                     class="form-control"
-                                    placeholder="Ushbu fayl...."
-                                    aria-label="Ushbu fayl...."
-                                    aria-describedby="basic-icon-default-message2">
-                                        </textarea>
+                                    placeholder="Izohingizni kiritng... "
+                                    aria-label="Izohingizni kiritng..."
+                                    aria-describedby="basic-icon-default-message2"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+
+                        <div class="input-group input-group-merge">
+
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Bajarildi: </label>
+                            <div style="margin-left: 10px" class="form-check form-switch mb-2">
+                                <input name="isCompleted" id="flexSwitchCheckChecked" class="form-check-input"
+                                       type="checkbox" required>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Yuborish</button>

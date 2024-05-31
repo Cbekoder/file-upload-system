@@ -3,6 +3,8 @@ from users.models import User, Role
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
+    is_active = models.BooleanField(default=True)
+    is_done_required = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

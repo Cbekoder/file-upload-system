@@ -58,7 +58,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label for="firstName" class="form-label">First Name</label>
+                                    <label for="firstName" class="form-label">Ism</label>
                                     <input
                                             class="form-control"
                                             type="text"
@@ -68,7 +68,7 @@
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <label for="lastName" class="form-label">Familiya</label>
                                     <input class="form-control" type="text" name="lastName" id="lastName"
                                            value="{{ user.last_name }}"/>
                                 </div>
@@ -84,17 +84,7 @@
                                     />
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="organization" class="form-label">Organization</label>
-                                    <input
-                                            type="text"
-                                            class="form-control"
-                                            id="organization"
-                                            name="organization"
-                                            value="{{ user.organization }}"
-                                    />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="phoneNumber">Phone Number</label>
+                                    <label class="form-label" for="phoneNumber">Telefon raqam </label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text">UZ</span>
                                         <input
@@ -107,85 +97,7 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address"
-                                           placeholder="Address" value="{{ user.address }}"/>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="state" class="form-label">District</label>
-                                    <input class="form-control" type="text" id="state" name="district"
-                                           placeholder="District" value="{{ user.district }}"/>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="country">Region</label>
-                                    <select id="country" name="region" class="select2 form-select">
-                                        <option disabled value="">Select</option>
-                                        <option value="Andijon"
-                                                {% if user.region == "Andijon" %}selected{% endif %}>Andijon
-                                        </option>
-                                        <option value="Buxoro"
-                                                {% if user.region == "Buxoro" %}selected{% endif %}>Buxoro
-                                        </option>
-                                        <option value="Jizzax"
-                                                {% if user.region == "Jizzax" %}selected{% endif %}>Jizzax
-                                        </option>
-                                        <option value="Qashqadaryo"
-                                                {% if user.region == "Qashqadaryo" %}selected{% endif %}>
-                                            Qashqadaryo
-                                        </option>
-                                        <option value="Navoi"
-                                                {% if user.region == "Navoi" %}selected{% endif %}>Navoi
-                                        </option>
-                                        <option value="Namangan"
-                                                {% if user.region == "Namangan" %}selected{% endif %}>
-                                            Namangan
-                                        </option>
-                                        <option value="Samarqand"
-                                                {% if user.region == "Samarqand" %}selected{% endif %}>
-                                            Samarqand
-                                        </option>
-                                        <option value="Sirdaryo"
-                                                {% if user.region == "Sirdaryo" %}selected{% endif %}>
-                                            Sirdaryo
-                                        </option>
-                                        <option value="Surxondaryo"
-                                                {% if user.region == "Surxondaryo" %}selected{% endif %}>
-                                            Surxondaryo
-                                        </option>
-                                        <option value="Toshkent"
-                                                {% if user.region == "Toshkent" %}selected{% endif %}>
-                                            Toshkent
-                                        </option>
-                                        <option value="Toshkent_sh"
-                                                {% if user.region == "Toshkent_sh" %}selected{% endif %}>
-                                            Toshkent sh.
-                                        </option>
-                                        <option value="Xorazm"
-                                                {% if user.region == "Xorazm" %}selected{% endif %}>Xorazm
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="language" class="form-label">Language</label>
-                                    <select id="language" class="select2 form-select">
-                                        <option value="">Select Language</option>
-                                        <option value="en">English</option>
-                                        <option value="fr">French</option>
-                                        <option value="de">German</option>
-                                        <option value="pt">Portuguese</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="currency" class="form-label">Currency</label>
-                                    <select id="currency" class="select2 form-select">
-                                        <option value="">Select Currency</option>
-                                        <option value="usd">USD</option>
-                                        <option value="euro">Euro</option>
-                                        <option value="pound">Pound</option>
-                                        <option value="bitcoin">Bitcoin</option>
-                                    </select>
-                                </div>
+
                             </div>
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary me-2">Save changes</button>

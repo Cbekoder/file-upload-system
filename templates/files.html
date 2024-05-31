@@ -93,23 +93,25 @@
             <div style="min-height: 130px; max-height: 600px" class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
-                    <tr>
+{#                    <tr>#}
+{#                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Nomi</th>#}
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Nomi</th>
-                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Izoh</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Holat</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuboruvchi</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Qabul qiluvchi</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yaratilgan vaqti</th>
+                        <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Yuklash</th>
                         <th style="position: sticky; top: 0; z-index: 2; background: #fff;">Actions</th>
+
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                     {% for file in files %}
                         <tr>
-                            <td><a href="{{ file.id }}">
-                                <i class="menu-icon tf-icons bx bx-file"></i><strong>{{ file.file.name }}</strong>
-                            </a></td>
-                            <td>{{ file.description }}</td>
+{#                            <td><a href="{{ file.id }}">#}
+{#                                <i class="menu-icon tf-icons bx bx-file"></i><strong>{{ file.file.name }}</strong>#}
+{#                            </a></td>#}
+                            <td><a href="/file/detail/{{ file.id }}">{{ file.description }}</a></td>
                             <td> {% if file.user == user %}
                                 <i class="menu-icon tf-icons bx bx-upload"></i>
                             {% elif file.to_user == user %}
@@ -118,6 +120,13 @@
                             <td>{{ file.user.full_name }}</td>
                             <td>{{ file.to_user.full_name }}</td>
                             <td>{{ file.uploaded_date }}</td>
+                            <td>
+                                {% if file.file %}
+                                    <a href="{{ file.file.url }}" download="{{ file.file.name }}"><i class="menu-icon tf-icons bx bx-file"></i></a>
+                                {% else %}
+                                    No file uploaded
+                                {% endif %}
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

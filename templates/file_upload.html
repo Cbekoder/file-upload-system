@@ -11,7 +11,7 @@
                 <h5 class="mb-0">Basic with Icons</h5>
             </div>
             <div class="card-body">
-                <form method="post"> {% csrf_token %}
+                <form method="post" enctype="multipart/form-data"> {% csrf_token %}
                     <div class="col mb-3">
                         <label class="form-label" for="basic-icon-default-email">Kimga:</label>
                         <div class="input-group input-group-merge">
@@ -69,7 +69,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Yuborish</button>
                 </form>
-            </div>                    <!--/ Basic Bootstrap Table -->
+            </div>                   
         </div>
     </div>
     <!-- / Content -->

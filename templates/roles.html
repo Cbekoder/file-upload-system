@@ -3,12 +3,12 @@
     {% load static %}
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">Kategoriyalar</h4>
+        <h4 class="fw-bold py-3 mb-4">Lavozimlar</h4>
 
         <!-- Basic Bootstrap Table -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-header">Kategoriyalar ro'yxati</h5>
+                <h5 class="card-header">Lavozimlar ro'yxati</h5>
                 <button
                         type="button"
                         class="btn rounded-pill btn-primary positioned-button"
@@ -21,7 +21,7 @@
                     <form method="post">{% csrf_token %}
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel1">Yangi jild</h5>
+                                <h5 class="modal-title" id="exampleModalLabel1">Yangi lavozim</h5>
                                 <button
                                         type="button"
                                         class="btn-close"
@@ -33,7 +33,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col mb-3">
-                                        <label for="nameBasic" class="form-label">Jild nomi</label>
+                                        <label for="nameBasic" class="form-label">Lavozim nomi</label>
                                         <input type="text" id="nameBasic" name="title" class="form-control"
                                                placeholder="Asosiy jild" required autofocus/>
                                     </div>
@@ -63,13 +63,13 @@
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                    {% for c in categories %}
+                    {% for c in roles %}
                         <tr>
                             <td>{{forloop.counter }}</td>
                             <td><a href="{{ c.id }}">
                                 <i class="menu-icon tf-icons bx bxs-network-chart"></i><strong>{{ c.title }}</strong>
                             </a></td>
-                            <td>{{ c.file_set.count }}</td>
+                            <td>{{ c.user_set.count }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -95,7 +95,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel1">
-                                                Jildni tahrirlash</h5>
+                                                Lavozimni tahrirlash</h5>
                                             <button
                                                     type="button"
                                                     class="btn-close"
